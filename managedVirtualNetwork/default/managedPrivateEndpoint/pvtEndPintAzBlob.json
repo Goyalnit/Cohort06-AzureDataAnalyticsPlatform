@@ -1,0 +1,10 @@
+{
+	"name": "pvtEndPintAzBlob",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/9846c094-a4b4-45b2-b95d-39136f43a3a7/resourceGroups/AZRG-AAP-Cohort06-DataAnalyticsPlatform-NitinGoyal/providers/Microsoft.Storage/storageAccounts/sacovidreportingng",
+		"groupId": "blob",
+		"fqdns": [
+			"sacovidreportingng.blob.core.windows.net"
+		]
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"name": "adf-convid-reporting",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "24f6d9d6-04ea-468d-8558-f25c8306fc86",
+		"tenantId": "36da45f1-dd2c-4d1f-af13-5abe46b99921"
+	}
+}
