@@ -18,6 +18,10 @@
 					{
 						"name": "Name",
 						"value": "Nitin's ETL pipeline"
+					},
+					{
+						"name": "Activity",
+						"value": "Copy data from SA to ADLS"
 					}
 				],
 				"typeProperties": {
