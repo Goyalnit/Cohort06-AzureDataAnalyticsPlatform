@@ -1,0 +1,21 @@
+{
+	"name": "ds_ecdc_data_https",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_ecdc_https",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "Cohort06-AzureDataAnalyticsPlatform/tree/main/ecdc%20data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
