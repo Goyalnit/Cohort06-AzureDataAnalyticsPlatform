@@ -13,9 +13,10 @@
 				"folderPath": "population",
 				"fileSystem": "raw"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": "\t",
 			"escapeChar": "\\",
-			"quoteChar": "\""
+			"firstRowAsHeader": true,
+			"quoteChar": ""
 		},
 		"schema": []
 	}
