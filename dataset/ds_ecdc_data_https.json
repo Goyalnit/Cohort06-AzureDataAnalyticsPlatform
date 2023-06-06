@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "HttpServerLocation",
-				"relativeUrl": "Goyalnit/Cohort06-AzureDataAnalyticsPlatform/blob/main/ecdc%20data/cases_deaths.csv"
+				"relativeUrl": "Goyalnit/Cohort06-AzureDataAnalyticsPlatform/main/ecdc%20data/case_deaths_uk_ind_only.csv"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
