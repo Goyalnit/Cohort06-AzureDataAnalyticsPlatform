@@ -5,11 +5,20 @@
 			"referenceName": "ls_ADF2ADLS",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"sinkFileNm": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().sinkFileNm",
+					"type": "Expression"
+				},
 				"folderPath": "ecdc",
 				"fileSystem": "raw"
 			},
