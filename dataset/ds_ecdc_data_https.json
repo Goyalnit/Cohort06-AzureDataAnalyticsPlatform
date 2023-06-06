@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "HttpServerLocation",
-				"relativeUrl": "Cohort06-AzureDataAnalyticsPlatform/tree/main/ecdc%20data"
+				"relativeUrl": "Cohort06-AzureDataAnalyticsPlatform/blob/main/ecdc%20data/cases_deaths.csv"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
