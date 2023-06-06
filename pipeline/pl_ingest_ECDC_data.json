@@ -51,13 +51,25 @@
 				"inputs": [
 					{
 						"referenceName": "ds_ecdc_data_https",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"relativeURL": {
+								"value": "@pipeline().parameters.relativeURL",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "ds_ecdc_data_adls",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"sinkFileNm": {
+								"value": "@pipeline().parameters.TargetFileNm",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
