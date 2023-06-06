@@ -6,14 +6,7 @@
 			{
 				"name": "Cpy_ecdc_data_adls",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Validation1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -36,7 +29,8 @@
 					"sink": {
 						"type": "DelimitedTextSink",
 						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "FlattenHierarchy"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
@@ -66,22 +60,16 @@
 						"type": "DatasetReference"
 					}
 				]
-			},
-			{
-				"name": "Validation1",
-				"type": "Validation",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"dataset": {
-						"referenceName": "ds_ecdc_data_https",
-						"type": "DatasetReference"
-					},
-					"timeout": "0.12:00:00",
-					"sleep": 10
-				}
 			}
 		],
+		"parameters": {
+			"relativeURL": {
+				"type": "string"
+			},
+			"TargetFileNm": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
