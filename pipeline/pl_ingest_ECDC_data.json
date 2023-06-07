@@ -1,6 +1,7 @@
 {
 	"name": "pl_ingest_ECDC_data",
 	"properties": {
+		"description": "Metadata driven single Pipeline is to ingest 5 datasets from https source (github.com) to adls gen-2. We are making use of lookup (to read config file), foreach and copy activities to perform e2e task. ",
 		"activities": [
 			{
 				"name": "Lookup for ecdc list",
