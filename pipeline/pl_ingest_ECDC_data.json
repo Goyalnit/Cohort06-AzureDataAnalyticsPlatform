@@ -1,5 +1,5 @@
 {
-	"name": "read_config",
+	"name": "pl_ingest_ECDC_data",
 	"properties": {
 		"activities": [
 			{
