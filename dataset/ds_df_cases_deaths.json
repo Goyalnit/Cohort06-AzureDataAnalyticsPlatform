@@ -1,0 +1,29 @@
+{
+	"name": "ds_df_cases_deaths",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_ADF2ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "cases_deaths.csv",
+				"folderPath": "ecdc",
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Prop_0\tProp_1\tProp_2\tProp_3\tProp_4\tProp_5\tProp_6\tProp_7\tProp_8",
+				"type": "String"
+			}
+		]
+	}
+}
