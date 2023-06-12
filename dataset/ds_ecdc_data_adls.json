@@ -22,7 +22,7 @@
 				"folderPath": "ecdc",
 				"fileSystem": "raw"
 			},
-			"columnDelimiter": "\t",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": ""
