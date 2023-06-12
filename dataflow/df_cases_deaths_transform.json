@@ -1,0 +1,32 @@
+{
+	"name": "df_cases_deaths_transform",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_df_cases_deaths",
+						"type": "DatasetReference"
+					},
+					"name": "CasesAndDeathsSource"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "filterOnlyEurpore"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {Prop_0     Prop_1     Prop_2     Prop_3     Prop_4     Prop_5     Prop_6     Prop_7     Prop_8} as string",
+				"     ),",
+				"     allowSchemaDrift: false,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> CasesAndDeathsSource",
+				"CasesAndDeathsSource filter(ERROR_FUNCTION('')) ~> filterOnlyEurpore"
+			]
+		}
+	}
+}
