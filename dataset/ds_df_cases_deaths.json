@@ -21,7 +21,39 @@
 		},
 		"schema": [
 			{
-				"name": "Prop_0\tProp_1\tProp_2\tProp_3\tProp_4\tProp_5\tProp_6\tProp_7\tProp_8",
+				"name": "country",
+				"type": "String"
+			},
+			{
+				"name": "country_code",
+				"type": "String"
+			},
+			{
+				"name": "continent",
+				"type": "String"
+			},
+			{
+				"name": "population",
+				"type": "String"
+			},
+			{
+				"name": "indicator",
+				"type": "String"
+			},
+			{
+				"name": "daily_count",
+				"type": "String"
+			},
+			{
+				"name": "date",
+				"type": "String"
+			},
+			{
+				"name": "rate_14_day",
+				"type": "String"
+			},
+			{
+				"name": "source",
 				"type": "String"
 			}
 		]
