@@ -15,17 +15,42 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "filterOnlyEurpore"
+					"name": "filterOnlyEurpore",
+					"description": "Filter is applied to have only continent as Europe and non-null valued in country code."
+				},
+				{
+					"name": "SelectfewColumns"
 				}
 			],
 			"scriptLines": [
 				"source(output(",
-				"          {Prop_0     Prop_1     Prop_2     Prop_3     Prop_4     Prop_5     Prop_6     Prop_7     Prop_8} as string",
+				"          country as string,",
+				"          country_code as string,",
+				"          continent as string,",
+				"          population as string,",
+				"          indicator as string,",
+				"          daily_count as string,",
+				"          date as string,",
+				"          rate_14_day as string,",
+				"          source as string",
 				"     ),",
 				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> CasesAndDeathsSource",
-				"CasesAndDeathsSource filter(ERROR_FUNCTION('')) ~> filterOnlyEurpore"
+				"CasesAndDeathsSource filter(continent == 'Europe' && not(isNull(country_code))) ~> filterOnlyEurpore",
+				"filterOnlyEurpore select(mapColumn(",
+				"          country,",
+				"          country_code,",
+				"          continent,",
+				"          population,",
+				"          indicator,",
+				"          daily_count,",
+				"          date,",
+				"          rate_14_day,",
+				"          source",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SelectfewColumns"
 			]
 		}
 	}
