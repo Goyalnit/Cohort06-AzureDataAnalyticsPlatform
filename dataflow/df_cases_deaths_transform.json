@@ -10,9 +10,16 @@
 						"type": "DatasetReference"
 					},
 					"name": "CasesAndDeathsSource"
+				},
+				{
+					"name": "CountryLookup"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "casesdeathoutput"
+				}
+			],
 			"transformations": [
 				{
 					"name": "filterOnlyEurpore",
@@ -20,6 +27,12 @@
 				},
 				{
 					"name": "SelectfewColumns"
+				},
+				{
+					"name": "PivotCasesAndDeathValues"
+				},
+				{
+					"name": "lookup1"
 				}
 			],
 			"scriptLines": [
@@ -29,14 +42,16 @@
 				"          continent as string,",
 				"          population as string,",
 				"          indicator as string,",
-				"          daily_count as string,",
-				"          date as string,",
+				"          daily_count as integer,",
+				"          date as date,",
 				"          rate_14_day as string,",
 				"          source as string",
 				"     ),",
 				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> CasesAndDeathsSource",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> CountryLookup",
 				"CasesAndDeathsSource filter(continent == 'Europe' && not(isNull(country_code))) ~> filterOnlyEurpore",
 				"filterOnlyEurpore select(mapColumn(",
 				"          country,",
@@ -49,7 +64,24 @@
 				"               'reported' + '_date' = $$)",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> SelectfewColumns"
+				"     skipDuplicateMapOutputs: false) ~> SelectfewColumns",
+				"SelectfewColumns pivot(groupBy(country,",
+				"          country_code,",
+				"          population,",
+				"          reported_date,",
+				"          source),",
+				"     pivotBy(indicator),",
+				"     count = sum(daily_count),",
+				"     columnNaming: '$V_$N',",
+				"     lateral: true) ~> PivotCasesAndDeathValues",
+				"PivotCasesAndDeathValues, CountryLookup lookup(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> casesdeathoutput"
 			]
 		}
 	}
