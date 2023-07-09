@@ -41,16 +41,15 @@
 				"filterOnlyEurpore select(mapColumn(",
 				"          country,",
 				"          country_code,",
-				"          continent,",
 				"          population,",
 				"          indicator,",
 				"          daily_count,",
-				"          date,",
-				"          rate_14_day,",
-				"          source",
+				"          source,",
+				"          each(match(name == 'date'),",
+				"               'reported' + '_date' = $$)",
 				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> SelectfewColumns"
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> SelectfewColumns"
 			]
 		}
 	}
