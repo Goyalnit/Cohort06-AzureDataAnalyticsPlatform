@@ -19,7 +19,20 @@
 					"name": "CountryLookup"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_processed_CasesAndDeath",
+						"type": "DatasetReference"
+					},
+					"name": "CasesAndDeathSink",
+					"description": "Transformed-Processed data from raw to processed folder in ADLS Gen2",
+					"rejectedDataLinkedService": {
+						"referenceName": "ls_ADF2ADLS",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
 			"transformations": [
 				{
 					"name": "filterOnlyEurpore",
@@ -101,7 +114,15 @@
 				"          population = CountryLookup@population",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> SelectforSink"
+				"     skipDuplicateMapOutputs: true) ~> SelectforSink",
+				"SelectforSink sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> CasesAndDeathSink"
 			]
 		}
 	}
