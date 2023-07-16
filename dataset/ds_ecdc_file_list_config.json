@@ -1,0 +1,29 @@
+{
+	"name": "ds_ecdc_file_list_config",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_Azblob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ecdc_file_list_config.json",
+				"container": "config"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"relativeURL": {
+					"type": "string"
+				},
+				"TargetFileNm": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}

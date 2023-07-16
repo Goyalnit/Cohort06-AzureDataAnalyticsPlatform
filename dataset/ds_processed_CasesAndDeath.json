@@ -1,5 +1,5 @@
 {
-	"name": "ds_population_by_age_lake",
+	"name": "ds_processed_CasesAndDeath",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_ADF2ADLS",
@@ -10,14 +10,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "population",
-				"fileSystem": "raw"
+				"folderPath": "ecdc/cases_deaths",
+				"fileSystem": "processed"
 			},
-			"columnDelimiter": "\t",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
-			"quoteChar": ""
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
 		},
 		"schema": []
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }

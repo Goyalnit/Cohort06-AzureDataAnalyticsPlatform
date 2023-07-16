@@ -1,19 +1,12 @@
 {
-	"name": "cpy_population_by_age_SA_ADLS",
+	"name": "cpy_population_by_age_SA_ADLS_copy1",
 	"properties": {
 		"description": "Copy population data from SA to Lake",
 		"activities": [
 			{
 				"name": "cpy_population_by_age_from SA to ADLS",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Get InputFile MetaData",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -234,36 +227,6 @@
 						"type": "DatasetReference"
 					}
 				]
-			},
-			{
-				"name": "Get InputFile MetaData",
-				"type": "GetMetadata",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataset": {
-						"referenceName": "ds_population_by_age",
-						"type": "DatasetReference"
-					},
-					"fieldList": [
-						"exists"
-					],
-					"storeSettings": {
-						"type": "AzureBlobStorageReadSettings",
-						"recursive": true,
-						"enablePartitionDiscovery": false
-					},
-					"formatSettings": {
-						"type": "DelimitedTextReadSettings"
-					}
-				}
 			}
 		],
 		"annotations": [],
