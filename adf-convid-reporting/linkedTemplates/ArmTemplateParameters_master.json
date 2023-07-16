@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-convid-reporting"
+		},
+		"ls_ADF2ADLS_accountKey": {
+			"value": ""
+		},
+		"ls_Azblob_connectionString": {
+			"value": ""
+		},
+		"ls_ADF2ADLS_properties_typeProperties_url": {
+			"value": "https://adlscovidreportingng.dfs.core.windows.net/"
+		},
+		"ls_ecdc_https_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/"
+		},
+		"pvtEndPintAzBlob_properties_privateLinkResourceId": {
+			"value": "/subscriptions/9846c094-a4b4-45b2-b95d-39136f43a3a7/resourceGroups/AZRG-AAP-Cohort06-DataAnalyticsPlatform-NitinGoyal/providers/Microsoft.Storage/storageAccounts/sacovidreportingng"
+		},
+		"pvtEndPintAzBlob_properties_groupId": {
+			"value": "blob"
+		},
+		"pvtEndPintAzBlob_properties_fqdns": {
+			"value": [
+				"sacovidreportingng.blob.core.windows.net"
+			]
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

@@ -1,0 +1,93 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-convid-reporting"
+		},
+		"ls_ADF2ADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_ADF2ADLS'"
+		},
+		"ls_Azblob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_Azblob'"
+		},
+		"ls_ADF2ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlscovidreportingng.dfs.core.windows.net/"
+		},
+		"ls_ecdc_https_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/"
+		},
+		"pvtEndPintAzBlob_properties_privateLinkResourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/9846c094-a4b4-45b2-b95d-39136f43a3a7/resourceGroups/AZRG-AAP-Cohort06-DataAnalyticsPlatform-NitinGoyal/providers/Microsoft.Storage/storageAccounts/sacovidreportingng"
+		},
+		"pvtEndPintAzBlob_properties_groupId": {
+			"type": "string",
+			"defaultValue": "blob"
+		},
+		"pvtEndPintAzBlob_properties_fqdns": {
+			"type": "array",
+			"defaultValue": [
+				"sacovidreportingng.blob.core.windows.net"
+			]
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adf-convid-reporting_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ls_ADF2ADLS_accountKey": {
+						"value": "[parameters('ls_ADF2ADLS_accountKey')]"
+					},
+					"ls_Azblob_connectionString": {
+						"value": "[parameters('ls_Azblob_connectionString')]"
+					},
+					"ls_ADF2ADLS_properties_typeProperties_url": {
+						"value": "[parameters('ls_ADF2ADLS_properties_typeProperties_url')]"
+					},
+					"ls_ecdc_https_properties_typeProperties_url": {
+						"value": "[parameters('ls_ecdc_https_properties_typeProperties_url')]"
+					},
+					"pvtEndPintAzBlob_properties_privateLinkResourceId": {
+						"value": "[parameters('pvtEndPintAzBlob_properties_privateLinkResourceId')]"
+					},
+					"pvtEndPintAzBlob_properties_groupId": {
+						"value": "[parameters('pvtEndPintAzBlob_properties_groupId')]"
+					},
+					"pvtEndPintAzBlob_properties_fqdns": {
+						"value": "[parameters('pvtEndPintAzBlob_properties_fqdns')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
