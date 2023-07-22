@@ -33,6 +33,10 @@
 				{
 					"name": "selectRqdFields2",
 					"description": "Remove continent"
+				},
+				{
+					"name": "SplitintoDailyandWeekly",
+					"description": "Add cases to distribute the data in multiple streams"
 				}
 			],
 			"scriptLines": [
@@ -85,7 +89,9 @@
 				"          population",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectRqdFields2"
+				"     skipDuplicateMapOutputs: true) ~> selectRqdFields2",
+				"selectRqdFields2 split(indicator == 'Weekly new hospital admissions per 100k' || indicator == 'Weekly new ICU admissions per 100k',",
+				"     disjoint: false) ~> SplitintoDailyandWeekly@(Weekly, Daily)"
 			]
 		}
 	}
