@@ -1,0 +1,92 @@
+{
+	"name": "df_hospital_icu_transform",
+	"properties": {
+		"description": "This to transform Hospitalization and ICU occupancy.",
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_hospital_icu_data",
+						"type": "DatasetReference"
+					},
+					"name": "HospitalAdmissionData"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_country_code_info",
+						"type": "DatasetReference"
+					},
+					"name": "CountryandCodeInfo",
+					"description": "This source contains country, country code 2 and 3 digit and population."
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "selectrequiredfieldshospital",
+					"description": "Renaming HospitalAdmissionData to dfd with columns 'reported_date, reported_year_week and remove url"
+				},
+				{
+					"name": "LookupCountry"
+				},
+				{
+					"name": "selectRqdFields2",
+					"description": "Remove continent"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          country as string,",
+				"          indicator as string,",
+				"          date as date,",
+				"          year_week as string,",
+				"          value as double,",
+				"          source as string,",
+				"          url as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> HospitalAdmissionData",
+				"source(output(",
+				"          country as string,",
+				"          country_code_2_digit as string,",
+				"          country_code_3_digit as string,",
+				"          continent as string,",
+				"          population as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> CountryandCodeInfo",
+				"HospitalAdmissionData select(mapColumn(",
+				"          country,",
+				"          indicator,",
+				"          reported_date = date,",
+				"          reported_year_week = year_week,",
+				"          value,",
+				"          source",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectrequiredfieldshospital",
+				"selectrequiredfieldshospital, CountryandCodeInfo lookup(selectrequiredfieldshospital@country == CountryandCodeInfo@country,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> LookupCountry",
+				"LookupCountry select(mapColumn(",
+				"          country = selectrequiredfieldshospital@country,",
+				"          indicator,",
+				"          reported_date,",
+				"          reported_year_week,",
+				"          value,",
+				"          source,",
+				"          country = CountryandCodeInfo@country,",
+				"          country_code_2_digit,",
+				"          country_code_3_digit,",
+				"          population",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectRqdFields2"
+			]
+		}
+	}
+}
