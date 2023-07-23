@@ -47,10 +47,6 @@
 					"description": "Add cases to distribute the data in multiple streams"
 				},
 				{
-					"name": "deriveHospitalDataYearrWeek",
-					"description": "Derive column YYYY-Wxx (x can be 01 to 52 weeks). This will be further used to derive week_Start_date and week_end_Date"
-				},
-				{
 					"name": "aggregate1",
 					"description": "1. Derive column YYYY-Wxx (x can be 01 to 52 weeks). This will be further used to derive week_Start_date and week_end_Date.\n2. Group by 'ecdc_year_week' and aggregate on producing columns 'week_start_date, week_end_date'"
 				}
@@ -125,8 +121,7 @@
 				"     skipDuplicateMapOutputs: true) ~> selectRqdFields2",
 				"selectRqdFields2 split(indicator == 'Weekly new hospital admissions per 100k' || indicator == 'Weekly new ICU admissions per 100k',",
 				"     disjoint: false) ~> SplitintoDailyandWeekly@(Weekly, Daily)",
-				"DimDate derive(ecdc_year_week = year + '-W' + lpad(week_of_year,02,'0')) ~> deriveHospitalDataYearrWeek",
-				"deriveHospitalDataYearrWeek aggregate(groupBy(ecdc_year_week = year + '-W' + lpad(week_of_year,02,'0')),",
+				"DimDate aggregate(groupBy(ecdc_year_week = year + '-W' + lpad(week_of_year,02,'0')),",
 				"     week_start_date = min(date),",
 				"          week_end_date = max(date)) ~> aggregate1"
 			]
