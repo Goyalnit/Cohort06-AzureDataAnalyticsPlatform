@@ -59,6 +59,14 @@
 				},
 				{
 					"name": "pivotWeekly"
+				},
+				{
+					"name": "SortCountryAscWeekDesc",
+					"description": "Sort country Asc and reported_year_week on Desc"
+				},
+				{
+					"name": "sortDaily",
+					"description": "Sort Daily file based on country (Asc) and reported_year_week (Desc)"
 				}
 			],
 			"scriptLines": [
@@ -159,7 +167,11 @@
 				"     pivotBy(indicator, ['Weekly new hospital admissions per 100k', 'Weekly new ICU admissions per 100k']),",
 				"     count = sum(value),",
 				"     columnNaming: '$V_$N',",
-				"     lateral: true) ~> pivotWeekly"
+				"     lateral: true) ~> pivotWeekly",
+				"pivotWeekly sort(asc(country, true),",
+				"     desc(reported_year_week, true)) ~> SortCountryAscWeekDesc",
+				"PivotDailyHospitalandICU sort(asc(country, true),",
+				"     desc(reported_year_week, true)) ~> sortDaily"
 			]
 		}
 	}
