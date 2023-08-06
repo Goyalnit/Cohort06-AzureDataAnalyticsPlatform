@@ -1,0 +1,126 @@
+{
+	"name": "df_testing_data_transoform",
+	"properties": {
+		"description": "Transform to bring weekly_start_date and weekly_end_date",
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_df_testing_input_data",
+						"type": "DatasetReference"
+					},
+					"name": "ECDCTestingFileInput",
+					"description": "Contains Covid Testing data being performed"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_Dim_Date",
+						"type": "DatasetReference"
+					},
+					"name": "DimDate",
+					"description": "This contains reported_year_date and weekly_start_date and weekly_end_date "
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_country_code_info",
+						"type": "DatasetReference"
+					},
+					"name": "CountryCodeFile",
+					"description": "Using to get 3 digit country code"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "AggDimDate",
+					"description": "Group by on YYYY-Wxx (week 01 or 02 so on) and aggregate week_start_date and week_end_date"
+				},
+				{
+					"name": "JoinTestingDimDate",
+					"description": "Inner join Testing file and AggDimDate table on year_week (YYYY-Wxx) to bring in 2 new fields (week_start_date and week_end_date)"
+				},
+				{
+					"name": "CountryCodeLookup",
+					"description": "Lookup CountryCode file and bring 3 digit country code to our testing file."
+				},
+				{
+					"name": "RemoveDupFields",
+					"description": "Removing duplicated fields - country, country_code, testing_yearly_week, continent"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          country as string,",
+				"          country_code as string,",
+				"          year_week as string,",
+				"          new_cases as string,",
+				"          tests_done as string,",
+				"          population as string,",
+				"          testing_rate as string,",
+				"          positivity_rate as string,",
+				"          testing_data_source as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> ECDCTestingFileInput",
+				"source(output(",
+				"          date_key as string,",
+				"          date as string,",
+				"          year as string,",
+				"          month as string,",
+				"          day as string,",
+				"          day_name as string,",
+				"          day_of_year as string,",
+				"          week_of_month as string,",
+				"          week_of_year as string,",
+				"          month_name as string,",
+				"          year_month as string,",
+				"          year_week as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> DimDate",
+				"source(output(",
+				"          country as string,",
+				"          country_code_2_digit as string,",
+				"          country_code_3_digit as string,",
+				"          continent as string,",
+				"          population as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> CountryCodeFile",
+				"DimDate aggregate(groupBy(testing_yearly_week = year+'-W'+lpad(week_of_year,02,'0')),",
+				"     week_start_date = min(date),",
+				"          week_end_date = max(date)) ~> AggDimDate",
+				"ECDCTestingFileInput, AggDimDate join(year_week == testing_yearly_week,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinTestingDimDate",
+				"JoinTestingDimDate, CountryCodeFile lookup(ECDCTestingFileInput@country == CountryCodeFile@country,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> CountryCodeLookup",
+				"CountryCodeLookup select(mapColumn(",
+				"          country = ECDCTestingFileInput@country,",
+				"          country_code_2_digit,",
+				"          country_code_3_digit,",
+				"          year_week,",
+				"          week_start_date,",
+				"          week_end_date,",
+				"          new_cases,",
+				"          tests_done,",
+				"          population = ECDCTestingFileInput@population,",
+				"          testing_rate,",
+				"          positivity_rate,",
+				"          testing_data_source,",
+				"          continent",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> RemoveDupFields"
+			]
+		}
+	}
+}
