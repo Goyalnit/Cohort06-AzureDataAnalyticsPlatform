@@ -139,6 +139,7 @@
 				"          reported_date as string,",
 				"          source as string",
 				"     ),",
+				"     truncate: true,",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
