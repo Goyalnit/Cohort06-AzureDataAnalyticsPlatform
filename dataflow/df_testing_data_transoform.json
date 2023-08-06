@@ -30,7 +30,15 @@
 					"description": "Using to get 3 digit country code"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_processed_testing_file",
+						"type": "DatasetReference"
+					},
+					"name": "TransformedTestingFile"
+				}
+			],
 			"transformations": [
 				{
 					"name": "AggDimDate",
@@ -119,7 +127,24 @@
 				"          continent",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> RemoveDupFields"
+				"     skipDuplicateMapOutputs: true) ~> RemoveDupFields",
+				"RemoveDupFields sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          country as string,",
+				"          country_code_2_digit as string,",
+				"          country_code_3_digit as string,",
+				"          population as string,",
+				"          confirmed_count as string,",
+				"          deaths_count as string,",
+				"          reported_date as string,",
+				"          source as string",
+				"     ),",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> TransformedTestingFile"
 			]
 		}
 	}
