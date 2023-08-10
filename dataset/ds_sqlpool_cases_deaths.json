@@ -1,0 +1,12 @@
+{
+	"name": "ds_sqlpool_cases_deaths",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sqlpool",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": []
+	}
+}
