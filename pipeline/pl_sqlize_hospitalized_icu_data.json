@@ -30,9 +30,8 @@
 					},
 					"sink": {
 						"type": "SqlDWSink",
-						"preCopyScript": "TRUNCATE table covid_reporting.hospital_admissions_daily;",
 						"writeBehavior": "Insert",
-						"disableMetricsCollection": false
+						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -150,7 +149,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_sqlpool_cases_deaths",
+						"referenceName": "ds_sqlpool_hospitalized_icu_data",
 						"type": "DatasetReference"
 					}
 				]
