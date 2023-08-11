@@ -33,7 +33,92 @@
 						"allowCopyCommand": true,
 						"disableMetricsCollection": false
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "country",
+									"type": "String"
+								},
+								"sink": {
+									"name": "country",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "country_code_2_digit",
+									"type": "String"
+								},
+								"sink": {
+									"name": "country_code_2_digit",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "country_code_3_digit",
+									"type": "String"
+								},
+								"sink": {
+									"name": "country_code_3_digit",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "population",
+									"type": "String"
+								},
+								"sink": {
+									"name": "population",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "confirmed_count",
+									"type": "String"
+								},
+								"sink": {
+									"name": "cases_count",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "deaths_count",
+									"type": "String"
+								},
+								"sink": {
+									"name": "deaths_count",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "reported_date",
+									"type": "String"
+								},
+								"sink": {
+									"name": "reported_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "source",
+									"type": "String"
+								},
+								"sink": {
+									"name": "source",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
