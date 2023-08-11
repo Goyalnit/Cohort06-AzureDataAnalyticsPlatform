@@ -3,7 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy Processed to Ded SQL pool",
+				"name": "Copy ProcessedData to Ded SQL pool",
+				"description": "Copy Cases & Deaths data to Ded SQL Pool",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -29,8 +30,8 @@
 					},
 					"sink": {
 						"type": "SqlDWSink",
-						"preCopyScript": "TRUNCATE covid_reporting.cases_and_deaths;",
-						"allowCopyCommand": true,
+						"preCopyScript": "TRUNCATE table covid_reporting.cases_and_deaths;",
+						"writeBehavior": "Insert",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
@@ -117,7 +118,12 @@
 									"type": "String"
 								}
 							}
-						]
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
 					}
 				},
 				"inputs": [
