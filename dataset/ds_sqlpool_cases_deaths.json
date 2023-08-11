@@ -10,7 +10,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "covid_reporting",
-			"table": "cases_and_deaths"
+			"table": "hospital_admissions_daily"
 		}
 	}
 }
