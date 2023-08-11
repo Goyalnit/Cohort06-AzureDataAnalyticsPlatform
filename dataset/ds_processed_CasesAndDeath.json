@@ -14,10 +14,43 @@
 				"fileSystem": "processed"
 			},
 			"columnDelimiter": ",",
-			"escapeChar": "",
+			"escapeChar": "\"",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "country",
+				"type": "String"
+			},
+			{
+				"name": "country_code_2_digit",
+				"type": "String"
+			},
+			{
+				"name": "country_code_3_digit",
+				"type": "String"
+			},
+			{
+				"name": "population",
+				"type": "String"
+			},
+			{
+				"name": "confirmed_count",
+				"type": "String"
+			},
+			{
+				"name": "deaths_count",
+				"type": "String"
+			},
+			{
+				"name": "reported_date",
+				"type": "String"
+			},
+			{
+				"name": "source",
+				"type": "String"
+			}
+		]
 	}
 }
