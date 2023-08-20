@@ -1,5 +1,5 @@
 {
-	"name": "cpy_population_by_age_SA_ADLS",
+	"name": "pl_population_by_age_SA_ADLS",
 	"properties": {
 		"description": "Copy population data from SA to Lake",
 		"activities": [
@@ -266,6 +266,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "Ingest"
+		},
 		"annotations": [],
 		"lastPublishTime": "2023-05-16T12:18:36Z"
 	},
