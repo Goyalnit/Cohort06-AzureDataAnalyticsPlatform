@@ -5,6 +5,9 @@
 			"referenceName": "ls_sqlpool",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "04_synapse-consumption"
+		},
 		"annotations": [],
 		"type": "AzureSqlDWTable",
 		"schema": [

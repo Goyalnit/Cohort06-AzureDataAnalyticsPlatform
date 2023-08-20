@@ -5,6 +5,9 @@
 			"referenceName": "ls_ADF2ADLS",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "03_processed"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

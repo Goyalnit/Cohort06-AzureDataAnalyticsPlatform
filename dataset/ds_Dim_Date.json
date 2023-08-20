@@ -5,6 +5,9 @@
 			"referenceName": "ls_ADF2ADLS",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "01_lookup"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
