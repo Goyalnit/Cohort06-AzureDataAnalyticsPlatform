@@ -79,7 +79,6 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlDWSource",
-						"sqlReaderQuery": "select * from data_source_table where LastModifytime > '@{activity('lkp_OldWaterMark').output.FirstRow.old_NewWatermarkValue}' \r\nand LastModifytime <= '@{activity('lkp_NewWaterMark').output.FirstRow.WatermarkValue}'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
