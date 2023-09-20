@@ -1,0 +1,16 @@
+{
+	"name": "ds_synapse_source_table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_SynapseAnalytics",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "data_source_table"
+		}
+	}
+}
