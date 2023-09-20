@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlDWSource",
-						"sqlReaderQuery": "SELECT MAX(LastModifytime) as NewWatermarkValue from data_source_table",
+						"sqlReaderQuery": "SELECT MAX(LastModifytime) as old_NewWatermarkValue from data_source_table",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
