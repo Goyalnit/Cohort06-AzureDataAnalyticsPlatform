@@ -78,6 +78,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlDWSource",
+						"sqlReaderQuery": "select * from data_source_table where LastModifytime < '@{activity('lkp_OldWaterMark').output.FirstRow.old_NewWatermarkValue}' \r\nand LastModifytime > '@{activity('lkp_NewWaterMark').output.FirstRow.WatermarkValue}'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -140,7 +141,7 @@
 						},
 						"TableName": {
 							"value": {
-								"value": "@{activity('lkp_OldWaterMark').output.firstRow.TableName}",
+								"value": "@{activity('lkp_NewWaterMark').output.firstRow.TableName}",
 								"type": "Expression"
 							},
 							"type": "String"
