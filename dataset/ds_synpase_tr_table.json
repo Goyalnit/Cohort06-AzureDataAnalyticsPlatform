@@ -1,0 +1,12 @@
+{
+	"name": "ds_synpase_tr_table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_SynapseAnalytics",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": []
+	}
+}
