@@ -79,7 +79,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlDWSource",
-						"sqlReaderQuery": "select * from data_source_table where LastModifytime > '@{activity('lkp_OldWaterMark').output.firstRow.LastModifytime}' \r\nand LastModifytime <= '@{activity('lkp_NewWaterMark').output.firstRow.WatermarkValue}'",
+						"sqlReaderQuery": "select * from data_source_table where LastModifytime > '@{activity('lkp_OldWaterMark').output.firstRow.NewWatermarkValue}' \r\nand LastModifytime <= '@{activity('lkp_NewWaterMark').output.firstRow.WatermarkValue}'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -135,7 +135,7 @@
 					"storedProcedureParameters": {
 						"LastModifiedtime": {
 							"value": {
-								"value": "@{activity('lkp_NewWaterMark').output.firstRow.NewWatermarkvalue}",
+								"value": "@{activity('lkp_NewWaterMark').output.firstRow.WatermarkValue}",
 								"type": "Expression"
 							},
 							"type": "DateTime"
